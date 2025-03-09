@@ -2,6 +2,11 @@
 
 This repository contains a curated list of research papers and resources grouped by topic.
 
+## Book
+
+- **[Interpretable Machine Learning: A Guide for Making Black Box Models Explainable](https://christophm.github.io/interpretable-ml-book/)**  
+  *Christoph Molnar, 2024*
+  
 ## Paper: Explainability and Interpretability
 
 - **[“Why Should I Trust You?” Explaining the Predictions of Any Classifier](https://arxiv.org/pdf/1602.04938)**  
@@ -20,7 +25,4 @@ This repository contains a curated list of research papers and resources grouped
 - **[garNER at SemEval-2023: Simplified Knowledge Augmentation for Multilingual Complex Named Entity Recognition](https://aclanthology.org/2023.semeval-1.114.pdf)**  
   *Noah Garner, Ankur Teredesai. SemEval 2023.*
 
-## Book
 
-- **[Interpretable Machine Learning: A Guide for Making Black Box Models Explainable](https://christophm.github.io/interpretable-ml-book/)**  
-  *Christoph Molnar, 2024*
