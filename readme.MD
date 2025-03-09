@@ -1,4 +1,4 @@
-# Paper: Research Papers and Resources
+# Research Papers, Books and Other Resources
 
 This repository contains a curated list of research papers and resources grouped by topic.
 
