@@ -3,3 +3,5 @@ transformers
 numpy 
 lime 
 tqdm
+matplotlib
+pandas
