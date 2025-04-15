@@ -120,7 +120,7 @@ def generate_csv_and_image(lime_results, idx):
     
 def main():
     startIdx = args.start_idx
-    for idx in range(startIdx, startIdx + 3):
+    for idx in range(startIdx, startIdx + 10):
         start_time = time.time()
         sequence = dataset.iloc[idx]["sequence"]
         lime_results = run_exp(sequence, idx)
