@@ -16,11 +16,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
-torch.cuda.empty_cache()
-
-start_time = time.time()
-
 ckpt = "/home/ab823254/data/NMT"
 device = torch.device("cuda")
 
@@ -52,6 +47,8 @@ raw_seq = ("CTGAAAGCTGAATACAGAAGGCATAGATGCTGCATCTTGAGTGTCCAGCTCTTCTGTGCTGGACATCA
 tokens = tokenizer.tokenize(raw_seq)
 lime_string = " ".join(tokens)
 
+
+start_time = time.time()
 explainer = LimeTextExplainer(
     split_expression=r"\s+",
     bow=False,
@@ -64,6 +61,8 @@ exp = explainer.explain_instance(
     num_features=15,
     num_samples=4000
 )
+
+
 
 lime_results = exp.as_list()
 logger.info(f"LIME explanation results: {lime_results}")
@@ -95,6 +94,6 @@ img_path = "lime_explanation_custom_sorted.png"
 plt.savefig(img_path, dpi=300)
 plt.close()
 logger.info(f"✅ Custom sorted LIME plot saved as: {img_path}")
-
 end_time = time.time()
+
 logger.info(f"🕒 Total runtime: {end_time - start_time:.2f} seconds")
