@@ -3,7 +3,8 @@ import os
 
 
 results = []
-data_folder = "/home/rouf/data/aggr/csv"
+data_folder = "/home/rouf/data/raw/lime_exp_results/csv"
+dataset = pd.read_csv("../dataset.csv")
 # Loop through all files from 0.csv to 5928.csv
 for i in range(5929):
     file_path = os.path.join(data_folder, f"{i}.csv")
@@ -14,12 +15,14 @@ for i in range(5929):
             results.append({
                 "seq_id": i,
                 "token": row['Token'],
-                "importance": row['Importance']
+                "importance": row['Importance'],
+                "label": dataset.iloc[i]["label"],
+                "sequence": dataset.iloc[i]["sequence"]
             })
 
 # Convert results to DataFrame
 results_df = pd.DataFrame(results)
 
 # Save to CSV
-output_csv_path = os.path.join(data_folder, "/home/rouf/data/aggr/filtered_TATA_sequences.csv")
+output_csv_path = os.path.join(data_folder, "/home/rouf/data/raw/lime_exp_results/filtered_TATA_sequences.csv")
 results_df.to_csv(output_csv_path, index=False)
