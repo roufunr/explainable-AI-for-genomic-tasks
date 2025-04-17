@@ -18,11 +18,11 @@ args = parser.parse_args()
 home_dir = f"{os.path.expanduser("~")}/data"
 
 # ---------------------------LOGGER-------------------------------------
-LOG_DIR = f"{home_dir}/{args.expId}/logs"
+LOG_DIR = f"{home_dir}/{args.expId}/logs/DNABERT"
 LOG_FILE = os.path.join(LOG_DIR, f"job_{args.job_id}.log")
 os.makedirs(LOG_DIR, exist_ok=True)
 
-RESULT_DIR = f"{home_dir}/{args.expId}/results/job_{args.job_id}"
+RESULT_DIR = f"{home_dir}/{args.expId}/results/DNABERT/job_{args.job_id}"
 os.makedirs(RESULT_DIR, exist_ok=True)
 
 logging.basicConfig(
@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 # ----------------------------------------------------------------
 
 #-------------------------------MODEL AND DATASET----------------------------
-ckpt = f"{home_dir}/promo_detection/hy_model"
+ckpt = f"{home_dir}/promo_detection/DNABERT"
 dataset_path = f"{home_dir}/promo_detection/dataset/dataset.csv"
 dataset = pd.read_csv(dataset_path)
 #----------------------------------------------------------------------------
