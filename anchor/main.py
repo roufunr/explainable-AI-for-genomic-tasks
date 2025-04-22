@@ -105,6 +105,9 @@ class SimpleAnchor:
         # Select the top tokens as the explanation
         top_tokens = [imp[1] for imp in importances[:num_features]]
         
+        # Store the importance scores of the top tokens
+        top_importances = [imp[2] for imp in importances[:num_features]]
+        
         # Calculate precision by sampling
         precision = self._calculate_precision(text, top_tokens, predict_fn, original_pred, num_samples)
         
@@ -113,6 +116,7 @@ class SimpleAnchor:
         
         return {
             'tokens': top_tokens,
+            'importances': top_importances,
             'precision': precision,
             'coverage': coverage,
             'class': self.class_names[original_pred]
@@ -163,13 +167,13 @@ explainer = SimpleAnchor(class_names=list(model.config.id2label.values()))
 # print("Debug: Created SimpleAnchor explainer")
 
 # Define the number of sequences to process (use a small number for testing)
-num_sequences = len(dataset)  # Process at most 10 sequences for testing
+num_sequences = len(dataset)  # Process all sequences in the dataset
 # print(f"Debug: Processing {num_sequences} sequences from the dataset")
 
 # Create the CSV file with headers
-csv_file = 'result.csv'
+csv_file = 'result2.csv'
 with open(csv_file, 'w') as f:
-    f.write('sequence_idx,true_label,predicted_label,anchor,precision,coverage,model_accuracy\n')
+    f.write('sequence_idx,true_label,predicted_label,anchor,importance_values,precision,coverage,model_accuracy\n')
 
 # Loop through the dataset
 for idx in range(num_sequences):
@@ -200,22 +204,17 @@ for idx in range(num_sequences):
     predicted_label = int(explanation['class'].split('_')[-1])
     model_accuracy = 'Correct' if int(true_label) == predicted_label else 'Incorrect'
     
-    # Print the explanation
-    # print("Debug: Explanation generated successfully")
-    # print('Sequence index: %d' % idx)
-    # print('True label: %d' % true_label)
-    # print('Predicted class: %s' % explanation['class'])
-    # print('Anchor: %s' % ' AND '.join(explanation['tokens']))
-    # print('Precision: %.2f' % explanation['precision'])
-    # print('Coverage: %.2f' % explanation['coverage'])
-    # print('Model accuracy: %s' % model_accuracy)
+    # Format the importance values as a string (with 4 decimal places)
+    importance_values = ";".join([f"{imp:.4f}" for imp in explanation['importances']])
     
+   
     # Create a result dictionary
     result = {
         'sequence_idx': idx,
         'true_label': true_label,
         'predicted_label': predicted_label,
         'anchor': ' AND '.join(explanation['tokens']),
+        'importance_values': importance_values,
         'precision': explanation['precision'],
         'coverage': explanation['coverage'],
         'model_accuracy': model_accuracy
@@ -223,10 +222,9 @@ for idx in range(num_sequences):
     
     # Write the result to the CSV file
     with open(csv_file, 'a') as f:
-        f.write(f"{result['sequence_idx']},{result['true_label']},{result['predicted_label']},\"{result['anchor']}\",{result['precision']},{result['coverage']},{result['model_accuracy']}\n")
+        f.write(f"{result['sequence_idx']},{result['true_label']},{result['predicted_label']},\"{result['anchor']}\",\"{result['importance_values']}\",{result['precision']},{result['coverage']},{result['model_accuracy']}\n")
     
     print(f"Debug: Result for sequence {idx} saved to {csv_file}")
 
 print(f"\nDebug: All results saved to {csv_file}")
 print("Debug: Script completed")
-
