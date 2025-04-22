@@ -1,0 +1,11 @@
+,Value
+Total Sequences,5929
+Label 0 Count,2944
+Label 1 Count,2985
+Contains TATA,554
+Label 0 with TATA,407
+Label 1 with TATA,147
+"TATA in Label 0, Negative",0
+"TATA in Label 0, Positive",407
+"TATA in Label 1, Negative",0
+"TATA in Label 1, Positive",147
