@@ -15,7 +15,7 @@ This repository contains a curated list of research papers and resources grouped
 - **[A Unified Approach to Interpreting Model Predictions](https://arxiv.org/pdf/1602.04938)**  
   *Marco Tulio Ribeiro, Sameer Singh, Carlos Guestrin. KDD 2016.*
 
-## Paper: Natural Language Explainability
+## Paper: Natural Language  Explainability
 
 - **[Explaining Black Box Text Modules in Natural Language with Language Models](https://arxiv.org/pdf/2305.09863)**  
   *Zhi Feng Chan et al. arXiv preprint, 2023.*
